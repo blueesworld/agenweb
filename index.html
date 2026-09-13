@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Agen Event, 31 May 2030. Introducing AgenPhone 1, AgenTab and AgenBook.">
-<title>Agen Event — Agen Global</title>
+<meta name="description" content="Agen Event, 31 May 2031. Introducing AgenPhone 1 and AgenAero 1.">
+<title>Agen Event — 31.05.2031</title>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <style>
   :root { --ink:#1d1d1f; --muted:#6e6e73; --line:#d2d2d7; --paper:#f5f5f7; }
@@ -45,6 +45,8 @@
   .timer-cell { min-width:74px; padding:11px 8px 9px; border-radius:14px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); backdrop-filter:blur(8px); }
   .timer-cell b { display:block; font-size:clamp(20px,2.4vw,28px); font-weight:600; letter-spacing:-.03em; font-variant-numeric:tabular-nums; line-height:1; }
   .timer-cell span { display:block; margin-top:5px; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.72); }
+  .timer-light { background:#fff; border-color:#d2d2d7; }
+  .timer-light span { color:#6e6e73; }
   .announce-line { color:rgba(255,255,255,.72); font-size:13.5px; letter-spacing:-.01em; }
 
   /* ── Event lineup ── */
@@ -99,6 +101,14 @@
   .footer { background:var(--paper); color:var(--muted); font-size:12px; }
   .footer a { color:#424245; }
   .footer a:hover { text-decoration:underline; }
+  .footer-button { padding:0; border:0; color:#424245; background:transparent; cursor:pointer; }
+  .footer-button:hover { text-decoration:underline; }
+  .legal-backdrop { position:fixed; inset:0; z-index:70; display:grid; place-items:center; padding:20px; background:rgba(0,0,0,.42); backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px); opacity:0; pointer-events:none; transition:opacity .25s ease; }
+  .legal-backdrop.open { opacity:1; pointer-events:auto; }
+  .legal-panel { width:min(100%,570px); max-height:min(78vh,680px); overflow:auto; padding:30px; border-radius:20px; background:#fff; box-shadow:0 30px 80px rgba(0,0,0,.32); transform:translateY(12px) scale(.98); transition:transform .3s cubic-bezier(.22,1,.36,1); }
+  .legal-backdrop.open .legal-panel { transform:none; }
+  .legal-close { width:32px; height:32px; display:grid; place-items:center; border:0; border-radius:50%; background:#f5f5f7; color:#1d1d1f; cursor:pointer; }
+  .legal-close:hover { background:#e8e8ed; }
   @keyframes eventGlow { 0%,100% { transform:translateX(-50%) scale(.92); opacity:.26; } 50% { transform:translateX(-50%) scale(1.12); opacity:.46; } }
   @keyframes auraPulse { 0%,100% { opacity:.55; } 50% { opacity:1; } }
   @keyframes markFade { from { opacity:0; transform:scale(.94); } to { opacity:1; transform:scale(1); } }
@@ -133,7 +143,7 @@
     <a href="#event" class="flex min-w-0 items-center gap-2.5 text-white hover:opacity-85">
       <span class="font-semibold tracking-[.16em] text-[10px] text-[#e2ddff] whitespace-nowrap">AGEN EVENT</span>
       <span class="w-px h-3 bg-white/35"></span>
-      <span class="font-medium truncate" data-i18n="banner_date">12.9.2029. See what is next.</span>
+      <span class="font-medium truncate" data-i18n="banner_date">31.05.2031. See what is next.</span>
       <span class="banner-extra mini-count whitespace-nowrap" id="bannerCount">—</span>
     </a>
     <select class="region-select shrink-0" id="languageSelect" aria-label="Language">
@@ -150,8 +160,7 @@
       <a href="#event" class="nav-link" data-i18n="nav_home">Home</a>
       <a href="#event" class="nav-link" data-i18n="nav_store">Store</a>
       <a href="#phone" class="nav-link" id="navPhone">AgenPhone</a>
-      <a href="#event" class="nav-link">AgenTab</a>
-      <a href="#event" class="nav-link">AgenBook</a>
+      <a href="#aero" class="nav-link">AgenAero</a>
       <a href="#event" class="nav-link" data-i18n="nav_support">Support</a>
     </div>
     <div class="flex items-center gap-4">
@@ -186,8 +195,8 @@
             <path class="mark-solid" d="M20 2 2.4 41h6.3l3.8-8.3h15l3.8 8.3h6.3L20 2Zm-4.6 27.2L20 18.4l4.7 10.8h-9.3Z"/>
           </svg>
         </div>
-        <h1 class="event-title mx-auto mt-9 reveal" data-i18n="event_title">Introducing AgenPhone 1, AgenTab, and AgenBook.</h1>
-        <p class="announce-line mt-5 reveal" data-i18n="event_stream">Streaming live from Izmir · 31 May 2030, 19:00 (Turkey Time)</p>
+        <h1 class="event-title mx-auto mt-9 reveal" data-i18n="event_title">Introducing AgenPhone 1 and AgenAero 1.</h1>
+        <p class="announce-line mt-5 reveal" data-i18n="event_stream">Streaming live from Izmir · 31 May 2031, 19:00 Turkish Time</p>
 
         <div class="mt-8 reveal">
           <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-white/60 mb-3" data-i18n="timer_label">The event begins in</p>
@@ -206,9 +215,9 @@
       <div class="max-w-[980px] mx-auto px-5">
         <div class="text-center reveal">
           <h2 class="heading-xl" data-i18n="lineup_title">Get to know the lineup.</h2>
-          <p class="copy-lg !text-[#a1a1a6] mt-4" data-i18n="lineup_sub">Three new products. Announced at the Agen Event.</p>
+          <p class="copy-lg !text-[#a1a1a6] mt-4" data-i18n="lineup_sub">Two new products. Announced at the Agen Event.</p>
         </div>
-        <div class="grid md:grid-cols-3 gap-5 mt-12">
+        <div class="grid md:grid-cols-2 gap-5 mt-12 max-w-[760px] mx-auto">
           <a href="#phone" class="lineup-card lineup-phone p-8 reveal">
             <div>
               <p class="eyebrow text-[#c4b5fd]" data-i18n="tag_new">New</p>
@@ -226,22 +235,20 @@
             <span class="tile-link mt-6" data-i18n="tile_phone_link">Learn more <span class="arrow">&gt;</span></span>
           </a>
 
-          <div class="lineup-card p-8 reveal reveal-d1" style="background:radial-gradient(ellipse at 50% 110%,#2a1f5a,#000 72%);color:#f5f5f7">
+          <div id="aero" class="lineup-card p-8 reveal reveal-d1" style="background:radial-gradient(ellipse at 50% 100%,#46338b,#09080d 72%);color:#f5f5f7">
             <div>
-              <p class="eyebrow text-[#b8a8ff]" data-i18n="tag_soon">Coming 2030</p>
-              <h3 class="mt-2">AgenTab</h3>
-              <p class="text-[14px] text-white/60 mt-2" data-i18n="tab_tag">A buttonless canvas.</p>
+              <p class="eyebrow text-[#b8a8ff]" data-i18n="tag_new">New</p>
+              <h3 class="mt-2">AgenAero 1</h3>
+              <p class="text-[14px] text-white/60 mt-2" data-i18n="aero_tag">Headphones. Sound without limits.</p>
             </div>
-            <div class="mt-auto pt-8 flex justify-center"><div class="w-[170px] h-[122px] rounded-xl" style="background:linear-gradient(160deg,#1a1a1c,#000);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),0 20px 50px rgba(124,58,237,.35)"></div></div>
-          </div>
-
-          <div class="lineup-card p-8 reveal reveal-d2" style="background:radial-gradient(ellipse at 50% 110%,#3b0a33,#000 72%);color:#f5f5f7">
-            <div>
-              <p class="eyebrow text-[#f0b7dd]" data-i18n="tag_soon">Coming 2030</p>
-              <h3 class="mt-2">AgenBook</h3>
-              <p class="text-[14px] text-white/60 mt-2" data-i18n="book_tag">Impossibly thin.</p>
+            <div class="mt-auto pt-8 flex justify-center" aria-label="AgenAero 1 headphones">
+              <div class="relative w-[190px] h-[170px]">
+                <div class="absolute left-1/2 top-0 -translate-x-1/2 w-[132px] h-[128px] rounded-t-[70px] border-[15px] border-[#292832] border-b-0" style="box-shadow:inset 0 2px 2px rgba(255,255,255,.18),0 15px 45px rgba(130,93,255,.3)"></div>
+                <div class="absolute left-0 bottom-0 w-[66px] h-[94px] rounded-[30px]" style="background:linear-gradient(145deg,#4a4954,#111116 60%,#2b2a33);box-shadow:inset 1px 1px 2px rgba(255,255,255,.2),0 18px 35px rgba(0,0,0,.5)"></div>
+                <div class="absolute right-0 bottom-0 w-[66px] h-[94px] rounded-[30px]" style="background:linear-gradient(215deg,#4a4954,#111116 60%,#2b2a33);box-shadow:inset 1px 1px 2px rgba(255,255,255,.2),0 18px 35px rgba(0,0,0,.5)"></div>
+                <span class="absolute left-[25px] bottom-[35px] text-white/70 font-semibold">A</span><span class="absolute right-[25px] bottom-[35px] text-white/70 font-semibold">A</span>
+              </div>
             </div>
-            <div class="mt-auto pt-8 flex justify-center"><div class="w-[190px] h-[112px] rounded-lg" style="background:linear-gradient(160deg,#1a1a1c,#000);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),0 20px 50px rgba(236,72,153,.28)"></div></div>
           </div>
         </div>
       </div>
@@ -253,14 +260,14 @@
         <div class="reveal">
           <p class="text-[13px] font-semibold text-[#6e45c2]" data-i18n="details_kicker">Agen Event</p>
           <h2 class="heading-xl mt-3" data-i18n="details_title">One morning. Everything new.</h2>
-          <p class="copy-lg mt-5" data-i18n="details_body">Join us on 31 May 2030 at 19:00 (Turkey Time) for the reveal of AgenPhone 1 and the next generation of Agen products. The stream is open to everyone.</p>
+          <p class="copy-lg mt-5" data-i18n="details_body">Join us on 31 May 2031 at 19:00 Turkish Time for the reveal of AgenPhone 1 and AgenAero 1. The stream is open to everyone.</p>
         </div>
         <div class="reveal reveal-d1">
           <div class="rounded-[22px] bg-white p-8" style="box-shadow:0 20px 50px -24px rgba(0,0,0,.25)">
             <p class="text-[11px] font-semibold uppercase tracking-[.2em] text-[#86868b]" data-i18n="timer_label">The event begins in</p>
             <p class="mt-3 text-[34px] font-semibold tracking-[-.03em] font-variant-numeric tabular-nums" id="inlineCount">—</p>
             <div class="mt-5 pt-5 border-t border-[#d2d2d7] text-[14px] text-[#6e6e73] leading-relaxed">
-              <p data-i18n="details_when">Friday, 31 May 2030 · 19:00 (Turkey Time)</p>
+              <p data-i18n="details_when">Saturday, 31 May 2031 · 19:00 Turkish Time</p>
               <p class="mt-1" data-i18n="details_where">Streamed live from Izmir</p>
             </div>
           </div>
@@ -357,13 +364,13 @@
     <section class="bg-[#f5f5f7] text-center px-5 py-20 sm:py-28">
       <div class="max-w-[720px] mx-auto reveal">
         <p class="text-[14px] font-semibold text-[#6e45c2]" data-i18n="closing_kicker">Announced at the Agen Event</p>
-        <h2 class="heading-xl mt-3" data-i18n="closing_title">See it first, on 12.9.2029.</h2>
+         <h2 class="heading-xl mt-3" data-i18n="closing_title">See it first, on 31.05.2031.</h2>
         <p class="copy-lg mt-5" data-i18n="closing_body">AgenPhone 1 will be revealed at the Agen Event. Availability details follow the broadcast.</p>
         <div class="mt-7 inline-flex gap-2.5">
-          <div class="timer-cell"><b id="dDays2">00</b><span data-i18n="unit_days">Days</span></div>
-          <div class="timer-cell" style="background:#fff;border-color:#d2d2d7"><b id="dHours2">00</b><span data-i18n="unit_hours">Hours</span></div>
-          <div class="timer-cell" style="background:#fff;border-color:#d2d2d7"><b id="dMins2">00</b><span data-i18n="unit_mins">Minutes</span></div>
-          <div class="timer-cell" style="background:#fff;border-color:#d2d2d7"><b id="dSecs2">00</b><span data-i18n="unit_secs">Seconds</span></div>
+           <div class="timer-cell timer-light"><b id="dDays2">00</b><span data-i18n="unit_days">Days</span></div>
+           <div class="timer-cell timer-light"><b id="dHours2">00</b><span data-i18n="unit_hours">Hours</span></div>
+           <div class="timer-cell timer-light"><b id="dMins2">00</b><span data-i18n="unit_mins">Minutes</span></div>
+           <div class="timer-cell timer-light"><b id="dSecs2">00</b><span data-i18n="unit_secs">Seconds</span></div>
         </div>
         <div class="mt-8"><a href="#event" class="blue-link" data-i18n="closing_link">Back to the Agen Event <span class="arrow">&gt;</span></a></div>
       </div>
@@ -373,39 +380,38 @@
 
 <footer id="siteFooter" class="footer">
   <div class="max-w-[980px] mx-auto px-5 py-8">
-    <p class="leading-relaxed" data-i18n="footer_note">AgenPhone 1, AgenTab and AgenBook will be announced at the Agen Event on 31 May 2030. Product specifications are subject to change.</p>
+    <p class="leading-relaxed" data-i18n="footer_note">AgenPhone 1 and AgenAero 1 will be announced at the Agen Event on 31 May 2031. Product specifications are subject to change.</p>
     <div class="mt-5 pt-4 border-t border-black/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <p data-i18n="footer_copyright">Copyright 2029 Agen Technologies. All rights reserved.</p>
-      <div class="flex gap-4"><a href="#" onclick="openLegal('privacy');return false;" data-i18n="footer_privacy">Privacy</a><a href="#" onclick="openLegal('terms');return false;" data-i18n="footer_terms">Terms of Use</a><a href="#" onclick="openLegal('sales');return false;" data-i18n="footer_sales">Sales and Refunds</a></div>
+      <p data-i18n="footer_copyright">Copyright 2031 Agen Technologies. All rights reserved.</p>
+      <div class="flex gap-4"><button class="footer-button" type="button" onclick="openLegal('privacy')" data-i18n="footer_privacy">Privacy</button><button class="footer-button" type="button" onclick="openLegal('terms')" data-i18n="footer_terms">Terms of Use</button><button class="footer-button" type="button" onclick="openLegal('sales')" data-i18n="footer_sales">Sales and Refunds</button></div>
     </div>
   </div>
 </footer>
 
-<!-- ══ Legal modal ══ -->
-<div id="legalModal" class="fixed inset-0 z-[80] hidden">
-  <div class="absolute inset-0 bg-black/40" style="backdrop-filter:blur(6px)" onclick="closeLegal()"></div>
-  <div class="relative min-h-full flex items-end sm:items-center justify-center p-0 sm:p-6">
-    <div id="legalCard" class="relative bg-white w-full sm:max-w-[560px] sm:rounded-[22px] rounded-t-[22px] shadow-2xl max-h-[88vh] overflow-y-auto" style="transition:transform .3s cubic-bezier(.22,1,.36,1),opacity .3s;transform:translateY(16px);opacity:0">
-      <button type="button" onclick="closeLegal()" aria-label="Close" class="absolute top-4 right-4 w-9 h-9 grid place-items-center rounded-full bg-black/[.06] hover:bg-black/[.12] transition-colors cursor-pointer">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1d1d1f" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
-      </button>
-      <div class="px-6 sm:px-9 py-9">
-        <h2 id="legalTitle" class="text-[26px] font-semibold tracking-[-.03em]">Privacy Policy</h2>
-        <p id="legalBody" class="mt-4 text-[15px] leading-[1.6] text-[#424245]"></p>
-        <button type="button" onclick="closeLegal()" class="mt-7 rounded-full bg-[#1d1d1f] text-white px-6 py-3 text-[15px] font-medium hover:bg-black transition-colors cursor-pointer" data-i18n="legal_close">Close</button>
+<!-- Footer legal details -->
+<div id="legalModal" class="legal-backdrop" role="dialog" aria-modal="true" aria-labelledby="legalTitle" onclick="if(event.target===this) closeLegal()">
+  <div class="legal-panel">
+    <div class="flex items-start justify-between gap-6">
+      <div>
+        <p class="text-[12px] font-semibold uppercase tracking-[.16em] text-[#6e6e73]">Agen</p>
+        <h2 id="legalTitle" class="mt-2 text-[28px] font-semibold tracking-[-.04em]">Privacy</h2>
       </div>
+      <button type="button" class="legal-close shrink-0" onclick="closeLegal()" aria-label="Close legal details">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
     </div>
+    <div id="legalBody" class="mt-6 text-[14px] leading-[1.55] text-[#424245]"></div>
   </div>
 </div>
 
 <script>
 const t = {
   en:{banner_date:"12.9.2029. See what is next.",nav_home:"Home",nav_store:"Store",nav_support:"Support",search_placeholder:"Search Agen",search_close:"Cancel",
-    event_title:"Introducing AgenPhone 1, AgenTab, and AgenBook.",event_stream:"Streaming live from Izmir · 31 May 2030, 19:00 (Turkey Time)",
+    event_title:"Introducing AgenPhone 1, AgenTab, and AgenBook.",event_stream:"Streaming live from Berlin · 12 September 2029, 10:00",
     timer_label:"The event begins in",unit_days:"Days",unit_hours:"Hours",unit_mins:"Minutes",unit_secs:"Seconds",
     lineup_title:"Get to know the lineup.",lineup_sub:"Three new products. Announced at the Agen Event.",tag_new:"New",tag_soon:"Coming 2030",
     phone_tag:"Black. Seamless. Buttonless.",tab_tag:"A buttonless canvas.",book_tag:"Impossibly thin.",tile_phone_link:"Learn more <span class='arrow'>&gt;</span>",
-    details_kicker:"Agen Event",details_title:"One morning. Everything new.",details_body:"Join us on 31 May 2030 at 19:00 (Turkey Time) for the reveal of AgenPhone 1 and the next generation of Agen products. The stream is open to everyone.",details_when:"Friday, 31 May 2030 · 19:00 (Turkey Time)",details_where:"Streamed live from Izmir",
+    details_kicker:"Agen Event",details_title:"One morning. Everything new.",details_body:"Join us on 12 September 2029 at 10:00 for the reveal of AgenPhone 1 and the next generation of Agen products. The stream is open to everyone.",details_when:"Thursday, 12 September 2029 · 10:00",details_where:"Streamed live from Berlin",
     subnav_design:"Design",subnav_camera:"Camera",product_specs:"Tech Specs",
     phone_kicker:"AgenPhone 1",phone_title:"Black. And nothing else.",phone_sub:"Seamless titanium. No buttons. Announced at the Agen Event.",phone_event_link:"Agen Event <span class='arrow'>&gt;</span>",phone_specs_link:"Tech Specs <span class='arrow'>&gt;</span>",
     design_kicker:"Black. One piece.",design_title:"Nothing gets in the way.",design_body:"AgenPhone 1 is milled from a single block of recycled titanium and finished in an impossibly deep Matte Black. No seams. No physical buttons. Only the essentials.",
@@ -413,18 +419,14 @@ const t = {
     camera_kicker:"A new point of view.",camera_title:"Dual 48MP Fusion camera.",camera_body:"More light. More detail. More of the moments that only happen once. The new Fusion system combines two pro cameras into a single effortless experience.",
     specs_kicker:"AgenPhone 1",specs_title:"In a word, remarkable.",spec_finish:"Finish",spec_finish_value:"Matte Black titanium. Seamless, buttonless sides.",spec_display:"Display",spec_display_value:"6.7-inch Agen XDR display with 1-120Hz adaptive refresh.",spec_camera:"Camera",spec_camera_value:"Dual 48MP Fusion camera. 5x optical-quality zoom. 8K cinematic video.",spec_chip:"Chip",spec_chip_value:"A1 Fusion chip, built for on-device intelligence.",spec_battery:"Battery",spec_battery_value:"Up to 36 hours of video playback.",
     closing_kicker:"Announced at the Agen Event",closing_title:"See it first, on 12.9.2029.",closing_body:"AgenPhone 1 will be revealed at the Agen Event. Availability details follow the broadcast.",closing_link:"Back to the Agen Event <span class='arrow'>&gt;</span>",
-    footer_note:"AgenPhone 1, AgenTab and AgenBook will be announced at the Agen Event on 31 May 2030. Product specifications are subject to change.",footer_copyright:"Copyright 2030 Agen Technologies. All rights reserved.",footer_privacy:"Privacy",footer_terms:"Terms of Use",footer_sales:"Sales and Refunds",
-    privacy_title:"Privacy Policy",privacy_body:"Agen is committed to protecting your privacy. We collect only the information needed to deliver the Agen Event experience, such as your selected language and region. We never sell your personal data. Any details you share to receive event updates are stored securely and used solely to keep you informed about the Agen Event on 31 May 2030.",
-    terms_title:"Terms of Use",terms_body:"By using this website you agree to use it for lawful, personal purposes only. All content, including AgenPhone 1, AgenTab and AgenBook concepts, product imagery and text, is the property of Agen Technologies and may not be reproduced without permission. Product details are provisional and may change before the Agen Event.",
-    sales_title:"Sales and Refunds",sales_body:"AgenPhone 1 is not yet available for purchase. Sales, pricing and refund terms will be published after the product is revealed at the Agen Event on 31 May 2030. No orders are being taken at this time and no payments are collected.",
-    legal_close:"Close",
+    footer_note:"AgenPhone 1, AgenTab and AgenBook will be announced at the Agen Event on 12 September 2029. Product specifications are subject to change.",footer_copyright:"Copyright 2029 Agen Technologies. All rights reserved.",footer_privacy:"Privacy",footer_terms:"Terms of Use",footer_sales:"Sales and Refunds",
     count_tpl:(d,h,m,s)=>`${d} days, ${h} hours, ${m} minutes, ${s} seconds`},
   de:{banner_date:"12.9.2029. Erlebe, was als Naechstes kommt.",nav_home:"Startseite",nav_store:"Store",nav_support:"Support",search_placeholder:"Agen durchsuchen",search_close:"Abbrechen",
-    event_title:"Wir stellen vor: AgenPhone 1, AgenTab und AgenBook.",event_stream:"Live aus Izmir · 31. Mai 2030, 19:00 (Tuerkei-Zeit)",
+    event_title:"Wir stellen vor: AgenPhone 1, AgenTab und AgenBook.",event_stream:"Live aus Berlin · 12. September 2029, 10:00",
     timer_label:"Das Event beginnt in",unit_days:"Tage",unit_hours:"Std.",unit_mins:"Min.",unit_secs:"Sek.",
     lineup_title:"Lerne das Line-up kennen.",lineup_sub:"Drei neue Produkte. Vorgestellt beim Agen Event.",tag_new:"Neu",tag_soon:"Ab 2030",
     phone_tag:"Black. Nahtlos. Ohne Tasten.",tab_tag:"Eine Leinwand ohne Tasten.",book_tag:"Unglaublich duenn.",tile_phone_link:"Mehr erfahren <span class='arrow'>&gt;</span>",
-    details_kicker:"Agen Event",details_title:"Ein Vormittag. Alles ist neu.",details_body:"Sei am 31. Mai 2030 um 19:00 (Tuerkei-Zeit) dabei, wenn wir AgenPhone 1 und die naechste Generation von Agen Produkten vorstellen. Der Stream ist fuer alle offen.",details_when:"Freitag, 31. Mai 2030 · 19:00 (Tuerkei-Zeit)",details_where:"Live aus Izmir",
+    details_kicker:"Agen Event",details_title:"Ein Vormittag. Alles ist neu.",details_body:"Sei am 12. September 2029 um 10:00 dabei, wenn wir AgenPhone 1 und die naechste Generation von Agen Produkten vorstellen. Der Stream ist fuer alle offen.",details_when:"Donnerstag, 12. September 2029 · 10:00",details_where:"Live aus Berlin",
     subnav_design:"Design",subnav_camera:"Kamera",product_specs:"Technische Daten",
     phone_kicker:"AgenPhone 1",phone_title:"Black. Und nichts sonst.",phone_sub:"Nahtloses Titan. Keine Tasten. Vorgestellt beim Agen Event.",phone_event_link:"Agen Event <span class='arrow'>&gt;</span>",phone_specs_link:"Technische Daten <span class='arrow'>&gt;</span>",
     design_kicker:"Black. Aus einem Stueck.",design_title:"Nichts steht im Weg.",design_body:"AgenPhone 1 wird aus einem einzigen Block recyceltem Titan gefertigt und in tiefem Mattschwarz veredelt. Keine Naehte. Keine physischen Tasten. Nur das Wesentliche.",
@@ -432,18 +434,14 @@ const t = {
     camera_kicker:"Ein neuer Blickwinkel.",camera_title:"Dual 48MP Fusion Kamera.",camera_body:"Mehr Licht. Mehr Details. Mehr von den Momenten, die nur einmal passieren. Das neue Fusion System vereint zwei Pro Kameras zu einem muhelosen Erlebnis.",
     specs_kicker:"AgenPhone 1",specs_title:"Mit einem Wort: bemerkenswert.",spec_finish:"Finish",spec_finish_value:"Titan in Mattschwarz. Nahtlose Seiten ohne Tasten.",spec_display:"Display",spec_display_value:"6,7-Zoll Agen XDR Display mit 1-120Hz adaptiver Aktualisierung.",spec_camera:"Kamera",spec_camera_value:"Dual 48MP Fusion Kamera. 5x Zoom in optischer Qualitaet. 8K Video.",spec_chip:"Chip",spec_chip_value:"A1 Fusion Chip, entwickelt fuer Intelligence auf dem Geraet.",spec_battery:"Akku",spec_battery_value:"Bis zu 36 Stunden Videowiedergabe.",
     closing_kicker:"Vorgestellt beim Agen Event",closing_title:"Erlebe es zuerst, am 12.9.2029.",closing_body:"AgenPhone 1 wird beim Agen Event vorgestellt. Details zur Verfuegbarkeit folgen nach der Uebertragung.",closing_link:"Zurueck zum Agen Event <span class='arrow'>&gt;</span>",
-    footer_note:"AgenPhone 1, AgenTab und AgenBook werden beim Agen Event am 31. Mai 2030 vorgestellt. Produktspezifikationen koennen sich aendern.",footer_copyright:"Copyright 2030 Agen Technologies. Alle Rechte vorbehalten.",footer_privacy:"Datenschutz",footer_terms:"Nutzungsbedingungen",footer_sales:"Verkauf und Rueckgabe",
-    privacy_title:"Datenschutzerklaerung",privacy_body:"Agen schuetzt deine Privatsphaere. Wir erfassen nur die Daten, die fuer das Agen Event Erlebnis noetig sind, etwa deine gewaehlte Sprache und Region. Wir verkaufen deine personenbezogenen Daten niemals. Angaben, die du fuer Event Updates teilst, werden sicher gespeichert und ausschliesslich verwendet, um dich ueber das Agen Event am 31. Mai 2030 zu informieren.",
-    terms_title:"Nutzungsbedingungen",terms_body:"Mit der Nutzung dieser Website erklaerst du dich damit einverstanden, sie nur fuer rechtmaessige, persoenliche Zwecke zu verwenden. Alle Inhalte, einschliesslich der Konzepte AgenPhone 1, AgenTab und AgenBook, Produktbilder und Texte, sind Eigentum von Agen Technologies und duerfen nicht ohne Genehmigung reproduziert werden. Produktdetails sind vorlaeufig und koennen sich vor dem Agen Event aendern.",
-    sales_title:"Verkauf und Rueckgabe",sales_body:"AgenPhone 1 ist noch nicht kaeuflich erhaeltlich. Verkaufs-, Preis- und Rueckgabebedingungen werden nach der Vorstellung des Produkts beim Agen Event am 31. Mai 2030 veroeffentlicht. Derzeit werden keine Bestellungen angenommen und keine Zahlungen eingezogen.",
-    legal_close:"Schliessen",
+    footer_note:"AgenPhone 1, AgenTab und AgenBook werden beim Agen Event am 12. September 2029 vorgestellt. Produktspezifikationen koennen sich aendern.",footer_copyright:"Copyright 2029 Agen Technologies. Alle Rechte vorbehalten.",footer_privacy:"Datenschutz",footer_terms:"Nutzungsbedingungen",footer_sales:"Verkauf und Rueckgabe",
     count_tpl:(d,h,m,s)=>`${d} Tage, ${h} Stunden, ${m} Minuten, ${s} Sekunden`},
   tr:{banner_date:"12.9.2029. Sirada ne var, gorun.",nav_home:"Ana Sayfa",nav_store:"Magaza",nav_support:"Destek",search_placeholder:"Agen'de ara",search_close:"Vazgec",
-    event_title:"AgenPhone 1, AgenTab ve AgenBook tanitiliyor.",event_stream:"Izmir'den canli · 31 Mayis 2030, 19:00 (Turkiye Saati)",
+    event_title:"AgenPhone 1, AgenTab ve AgenBook tanitiliyor.",event_stream:"Berlin'den canli · 12 Eylul 2029, 10:00",
     timer_label:"Etkinlik basliyor",unit_days:"Gun",unit_hours:"Saat",unit_mins:"Dakika",unit_secs:"Saniye",
     lineup_title:"Serayi tanisin.",lineup_sub:"Uc yeni urun. Agen Etkinligi'nde tanitildi.",tag_new:"Yeni",tag_soon:"2030'da",
     phone_tag:"Black. Dikisiz. Dugmesiz.",tab_tag:"Dugmesiz bir tuval.",book_tag:"Inanilmaz ince.",tile_phone_link:"Daha fazla bilgi <span class='arrow'>&gt;</span>",
-    details_kicker:"Agen Etkinligi",details_title:"Tek sabah. Her sey yeni.",details_body:"31 Mayis 2030, 19:00 (Turkiye Saati)'de AgenPhone 1 ve yeni nesil Agen urunlerinin tanitimi icin bize katilin. Yayin herkese acik.",details_when:"Cuma, 31 Mayis 2030 · 19:00 (Turkiye Saati)",details_where:"Izmir'den canli yayin",
+    details_kicker:"Agen Etkinligi",details_title:"Tek sabah. Her sey yeni.",details_body:"12 Eylul 2029, 10:00'da AgenPhone 1 ve yeni nesil Agen urunlerinin tanitimi icin bize katilin. Yayin herkese acik.",details_when:"Persembe, 12 Eylul 2029 · 10:00",details_where:"Berlin'den canli yayin",
     subnav_design:"Tasarim",subnav_camera:"Kamera",product_specs:"Teknik Ozellikler",
     phone_kicker:"AgenPhone 1",phone_title:"Black. Baska hicbir sey.",phone_sub:"Dikisli titanyum. Dugme yok. Agen Etkinligi'nde tanitildi.",phone_event_link:"Agen Etkinligi <span class='arrow'>&gt;</span>",phone_specs_link:"Teknik Ozellikler <span class='arrow'>&gt;</span>",
     design_kicker:"Black. Tek parca.",design_title:"Hicbir sey yoluna cikmaz.",design_body:"AgenPhone 1, tek parca geri donusturulmus titanyumdan islenir ve derin Mat Siyah ile tamamlanir. Ek yeri yok. Fiziksel dugme yok. Sadece gerekli olan.",
@@ -451,16 +449,70 @@ const t = {
     camera_kicker:"Yeni bir bakis acisi.",camera_title:"Cift 48MP Fusion kamera.",camera_body:"Daha fazla isik. Daha fazla detay. Yalnizca bir kez yasayan anlardan daha fazlasi. Yeni Fusion sistem iki pro kamerayi tek ve zahmetsiz bir deneyimde birlestirir.",
     specs_kicker:"AgenPhone 1",specs_title:"Tek kelimeyle: dikkat cekici.",spec_finish:"Renk",spec_finish_value:"Mat Siyah titanyum. Dikisiz, dugmesiz kenarlar.",spec_display:"Ekran",spec_display_value:"1-120Hz uyarlanabilir yenilemeli 6,7 inc Agen XDR ekran.",spec_camera:"Kamera",spec_camera_value:"Cift 48MP Fusion kamera. 5x optik kalitede zoom. 8K video.",spec_chip:"Cip",spec_chip_value:"Cihaz icin zeka icin uretilmis A1 Fusion cip.",spec_battery:"Pil",spec_battery_value:"36 saate kadar video oynatma.",
     closing_kicker:"Agen Etkinligi'nde tanitildi",closing_title:"Once sen gor, 12.9.2029'da.",closing_body:"AgenPhone 1, Agen Etkinligi'nde tanitilacak. Satis detaylari yayindan sonra paylasilacak.",closing_link:"Agen Etkinligi'ne don <span class='arrow'>&gt;</span>",
-    footer_note:"AgenPhone 1, AgenTab ve AgenBook, 31 Mayis 2030 Agen Etkinligi'nde tanitilacak. Urun ozellikleri degisebilir.",footer_copyright:"Telif Hakki 2030 Agen Technologies. Tum haklari saklidir.",footer_privacy:"Gizlilik",footer_terms:"Kullanim Kosullari",footer_sales:"Satis ve Iadeler",
-    privacy_title:"Gizlilik Politikasi",privacy_body:"Agen gizliliginizi korumaya kararlidir. Yalnizca Agen Etkinligi deneyimini sunmak icin gereken bilgileri, orn. sectiginiz dil ve bolgeyi toplariz. Kisisel verilerinizi asla satmayiz. Etkinlik guncellemeleri almak icin paylastiginiz bilgiler guvenli sekilde saklanir ve yalnizca sizi 31 Mayis 2030 Agen Etkinligi hakkinda bilgilendirmek icin kullanilir.",
-    terms_title:"Kullanim Kosullari",terms_body:"Bu web sitesini kullanarak yalnizca yasal ve kisisel amaclarla kullanmayi kabul edersiniz. AgenPhone 1, AgenTab ve AgenBook konseptleri, urun gorselleri ve metinleri dahil tum icerik Agen Technologies'in mulkiyetindedir ve izinsiz cogaltilamaz. Urun detaylari gecicidir ve Agen Etkinligi'nden once degisebilir.",
-    sales_title:"Satis ve Iadeler",sales_body:"AgenPhone 1 henuz satista degildir. Satis, fiyatlandirma ve iade kosullari, urunun 31 Mayis 2030 Agen Etkinligi'nde tanitilmasindan sonra yayimlanacaktir. Su anda hicbir siparis alinmamakta ve odeme tahsil edilmemektedir.",
-    legal_close:"Kapat",
+    footer_note:"AgenPhone 1, AgenTab ve AgenBook, 12 Eylul 2029 Agen Etkinligi'nde tanitilacak. Urun ozellikleri degisebilir.",footer_copyright:"Telif Hakki 2029 Agen Technologies. Tum haklari saklidir.",footer_privacy:"Gizlilik",footer_terms:"Kullanim Kosullari",footer_sales:"Satis ve Iadeler",
     count_tpl:(d,h,m,s)=>`${d} gun, ${h} saat, ${m} dakika, ${s} saniye`}
 };
 
+Object.assign(t.en, {
+  banner_date:"31.05.2031. See what is next.",
+  event_title:"Introducing AgenPhone 1 and AgenAero 1.",
+  event_stream:"Streaming live from Izmir · 31 May 2031, 19:00 Turkish Time",
+  lineup_sub:"Two new products. Announced at the Agen Event.",
+  aero_tag:"Headphones. Sound without limits.",
+  details_body:"Join us on 31 May 2031 at 19:00 Turkish Time for the reveal of AgenPhone 1 and AgenAero 1. The stream is open to everyone.",
+  details_when:"Saturday, 31 May 2031 · 19:00 Turkish Time",
+  details_where:"Streaming live from Izmir",
+  closing_title:"See it first, on 31.05.2031.",
+  footer_note:"AgenPhone 1 and AgenAero 1 will be announced at the Agen Event on 31 May 2031. Product specifications are subject to change.",
+  footer_copyright:"Copyright 2031 Agen Technologies. All rights reserved."
+});
+Object.assign(t.de, {
+  banner_date:"31.05.2031. Erlebe, was als Naechstes kommt.",
+  event_title:"Wir stellen vor: AgenPhone 1 und AgenAero 1.",
+  event_stream:"Live aus Izmir · 31. Mai 2031, 19:00 Uhr (tuerkische Zeit)",
+  lineup_sub:"Zwei neue Produkte. Vorgestellt beim Agen Event.",
+  aero_tag:"Kopfhoerer. Klang ohne Grenzen.",
+  details_body:"Sei am 31. Mai 2031 um 19:00 Uhr tuerkischer Zeit dabei, wenn wir AgenPhone 1 und AgenAero 1 vorstellen. Der Stream ist fuer alle offen.",
+  details_when:"Samstag, 31. Mai 2031 · 19:00 Uhr (tuerkische Zeit)",
+  details_where:"Live aus Izmir",
+  closing_title:"Erlebe es zuerst, am 31.05.2031.",
+  footer_note:"AgenPhone 1 und AgenAero 1 werden beim Agen Event am 31. Mai 2031 vorgestellt. Produktspezifikationen koennen sich aendern.",
+  footer_copyright:"Copyright 2031 Agen Technologies. Alle Rechte vorbehalten."
+});
+Object.assign(t.tr, {
+  banner_date:"31.05.2031. Sirada ne var, gorun.",
+  event_title:"AgenPhone 1 ve AgenAero 1 tanitiliyor.",
+  event_stream:"Izmir'den canli · 31 Mayis 2031, 19:00 (Turkiye Saati)",
+  lineup_sub:"Iki yeni urun. Agen Etkinligi'nde tanitildi.",
+  aero_tag:"Kulaklik. Sinirsiz ses.",
+  details_body:"AgenPhone 1 ve AgenAero 1'in tanitimi icin 31 Mayis 2031, 19:00'da (Turkiye Saati) bize katilin. Yayin herkese acik.",
+  details_when:"Cumartesi, 31 Mayis 2031 · 19:00 (Turkiye Saati)",
+  details_where:"Izmir'den canli yayin",
+  closing_title:"Once sen gor, 31.05.2031'de.",
+  footer_note:"AgenPhone 1 ve AgenAero 1, 31 Mayis 2031 Agen Etkinligi'nde tanitilacak. Urun ozellikleri degisebilir.",
+  footer_copyright:"Telif Hakki 2031 Agen Technologies. Tum haklari saklidir."
+});
+
+const legalCopy = {
+  en: {
+    privacy: { title:"Privacy", body:"<p>At Agen, privacy is a fundamental human right. We collect only the information needed to operate this demonstration website, such as your selected language stored in your browser.</p><p class='mt-4'>No account, payment, or personal information is collected through this experience. We do not sell personal information or use it for advertising.</p>" },
+    terms: { title:"Terms of Use", body:"<p>This Agen Event website is a design concept and is provided for demonstration purposes only. Product names, specifications, imagery, dates and availability shown here are illustrative and may change.</p><p class='mt-4'>By using this site, you agree not to misuse its content or attempt to interfere with its operation.</p>" },
+    sales: { title:"Sales and Refunds", body:"<p>AgenPhone 1 and AgenAero 1 are not currently available to order. No sale, payment, reservation, or shipment can be completed through this site.</p><p class='mt-4'>Availability, pricing, sales and refund terms will be announced after the Agen Event on 31 May 2031.</p>" }
+  },
+  de: {
+    privacy: { title:"Datenschutz", body:"<p>Bei Agen ist Datenschutz ein grundlegendes Menschenrecht. Wir speichern fuer diese Demonstrationswebsite nur die in deinem Browser gewaehlte Sprache.</p><p class='mt-4'>Es werden keine Konten, Zahlungs- oder personenbezogenen Daten erfasst. Wir verkaufen keine Daten und verwenden sie nicht fuer Werbung.</p>" },
+    terms: { title:"Nutzungsbedingungen", body:"<p>Diese Agen Event Website ist ein Designkonzept und dient nur zu Demonstrationszwecken. Produktnamen, Spezifikationen, Bilder, Daten und Verfuegbarkeiten sind beispielhaft und koennen sich aendern.</p><p class='mt-4'>Durch die Nutzung dieser Website stimmst du zu, ihre Inhalte nicht missbraeuchlich zu verwenden oder ihren Betrieb zu stoeren.</p>" },
+    sales: { title:"Verkauf und Rueckgabe", body:"<p>AgenPhone 1 und AgenAero 1 koennen derzeit nicht bestellt werden. Ueber diese Website kann kein Verkauf, keine Zahlung, Reservierung oder Lieferung erfolgen.</p><p class='mt-4'>Informationen zu Verfuegbarkeit, Preisen, Verkauf und Rueckgabe werden nach dem Agen Event am 31. Mai 2031 bekannt gegeben.</p>" }
+  },
+  tr: {
+    privacy: { title:"Gizlilik", body:"<p>Agen'de gizlilik temel bir insan hakkidir. Bu demo web sitesi icin yalnizca tarayicinizda saklanan dil tercihini topluyoruz.</p><p class='mt-4'>Bu deneyimde hesap, odeme veya kisisel bilgi toplanmaz. Kisisel bilgileri satmaz veya reklam icin kullanmayiz.</p>" },
+    terms: { title:"Kullanim Kosullari", body:"<p>Bu Agen Etkinligi sitesi bir tasarim konseptidir ve yalnizca tanitim amaciyla sunulmustur. Urun adlari, teknik ozellikler, gorseller, tarihler ve uygunluk bilgileri ornek niteligindedir ve degisebilir.</p><p class='mt-4'>Bu siteyi kullanarak icerigini kotuye kullanmamayi veya isleyisine mudahale etmemeyi kabul edersiniz.</p>" },
+    sales: { title:"Satis ve Iadeler", body:"<p>AgenPhone 1 ve AgenAero 1 su anda siparis edilemez. Bu site uzerinden satis, odeme, rezervasyon veya teslimat tamamlanamaz.</p><p class='mt-4'>Uygunluk, fiyatlandirma, satis ve iade kosullari 31 Mayis 2031 Agen Etkinligi'nden sonra duyurulacaktir.</p>" }
+  }
+};
+
 let lang = localStorage.getItem("agen-language") || "en";
-const LAUNCH = new Date("2030-05-31T19:00:00+03:00").getTime();
+const LAUNCH = new Date("2031-05-31T19:00:00+03:00").getTime();
 const pad = n => String(n).padStart(2,"0");
 
 function applyLanguage(next){
@@ -471,7 +523,6 @@ function applyLanguage(next){
   const d = t[lang];
   document.querySelectorAll("[data-i18n]").forEach(el => { const v = d[el.dataset.i18n]; if(v !== undefined) el.innerHTML = v; });
   document.querySelectorAll("[data-i18n-placeholder]").forEach(el => { el.placeholder = d[el.dataset.i18nPlaceholder] || el.placeholder; });
-  if(typeof renderLegal === "function") renderLegal();
   tick();
 }
 
@@ -492,14 +543,29 @@ function toggleSearch(){
   if(!p.classList.contains("hidden")) setTimeout(() => document.getElementById("searchInput").focus(), 80);
 }
 
+function openLegal(topic){
+  const content = legalCopy[lang][topic];
+  document.getElementById("legalTitle").textContent = content.title;
+  document.getElementById("legalBody").innerHTML = content.body;
+  document.getElementById("legalModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeLegal(){
+  document.getElementById("legalModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
 function showPage(){
-  const onPhone = location.hash.indexOf("#phone") === 0;
+  const hash = location.hash || "#event";
+  const onPhone = hash.indexOf("#phone") === 0;
   document.getElementById("eventPage").hidden = onPhone;
   document.getElementById("phonePage").hidden = !onPhone;
   document.getElementById("navPhone").classList.toggle("current", onPhone);
   document.getElementById("searchPanel").classList.add("hidden");
   document.querySelectorAll(".reveal").forEach(el => el.classList.remove("on"));
-  if(onPhone || location.hash === "#event" || !location.hash) window.scrollTo({top:0,behavior:"auto"});
+  if(hash === "#phone" || hash === "#event") window.scrollTo({top:0,behavior:"auto"});
+  else setTimeout(() => document.querySelector(hash)?.scrollIntoView({ behavior:"smooth", block:"start" }), 0);
   observeReveals();
 }
 
@@ -512,32 +578,9 @@ function observeReveals(){
   document.querySelectorAll(".reveal:not(.on)").forEach(el => observer.observe(el));
 }
 
-let legalKey = null;
-function openLegal(kind){
-  legalKey = kind;
-  renderLegal();
-  const modal = document.getElementById("legalModal");
-  const card = document.getElementById("legalCard");
-  modal.classList.remove("hidden");
-  document.body.style.overflow = "hidden";
-  requestAnimationFrame(() => { card.style.transform = "translateY(0)"; card.style.opacity = "1"; });
-}
-function closeLegal(){
-  const modal = document.getElementById("legalModal");
-  const card = document.getElementById("legalCard");
-  card.style.transform = "translateY(16px)"; card.style.opacity = "0";
-  setTimeout(() => { modal.classList.add("hidden"); document.body.style.overflow = ""; legalKey = null; }, 260);
-}
-function renderLegal(){
-  if(!legalKey) return;
-  const d = t[lang];
-  document.getElementById("legalTitle").textContent = d[legalKey + "_title"];
-  document.getElementById("legalBody").textContent = d[legalKey + "_body"];
-}
-
 document.getElementById("languageSelect").addEventListener("change", e => applyLanguage(e.target.value));
 addEventListener("hashchange", showPage);
-addEventListener("keydown", e => { if(e.key === "Escape"){ document.getElementById("searchPanel").classList.add("hidden"); if(!document.getElementById("legalModal").classList.contains("hidden")) closeLegal(); } });
+addEventListener("keydown", e => { if(e.key === "Escape"){ document.getElementById("searchPanel").classList.add("hidden"); closeLegal(); } });
 
 applyLanguage(lang);
 showPage();
